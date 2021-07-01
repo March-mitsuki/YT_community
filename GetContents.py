@@ -106,7 +106,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_file,
 gs = gspread.authorize(credentials)
 work_sheet_book = gs.open_by_key(spreadSheet_key)
 work_sheet_page = work_sheet_book.worksheet(spreadSheet_page)
-set_with_dataframe(work_sheet_page, df, include_index=True)
+set_with_dataframe(work_sheet_page, df, include_index=False)
 
 time.sleep(1)
 browser.quit()
