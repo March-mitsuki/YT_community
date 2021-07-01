@@ -12,11 +12,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 from gspread_dataframe import set_with_dataframe
 
-browser = webdriver.Firefox()
+options = webdriver.FirefoxOptions()
+# options.headless = True
+browser = webdriver.Firefox(options=options)
 browser.get('https://www.youtube.com/c/LutoAraka/community')
 time.sleep(2)
 
-"""
 # 最後に到達しているかどうかをチェックし
 browser.find_element_by_id('content-text').click()
 for i in range(10):
@@ -34,7 +35,6 @@ while judgeContent == 0:
     FindContent = browser.find_elements_by_tag_name('ytd-backstage-post-thread-renderer')
     LastContent_text = FindContent[len(FindContent) - 1].text
     judgeContent = bool(re.match(r".*Forgot to post on yt but here's schedule for this week! :3.*", LastContent_text, re.S))
-"""
 
 # 全部のcontents内容を取り出す
 GetContents = browser.find_elements_by_tag_name('ytd-backstage-post-thread-renderer')
@@ -52,12 +52,11 @@ for GetUrl in GetPosts:
 PostDates = []
 for GetPostDate in GetPosts:
     PostDate = GetPostDate.text
-    PostDates.append(PostDates)
+    PostDates.append(PostDate)
 print(contents)
 print(Urls)
 print(PostDates)
 
-"""
 # time deltaをdateに変換
 for i, Time in enumerate(PostDates):
     judgeTimeDay = bool(re.match(r".*日前.*", Time))
@@ -108,7 +107,6 @@ gs = gspread.authorize(credentials)
 work_sheet_book = gs.open_by_key(spreadSheet_key)
 work_sheet_page = work_sheet_book.worksheet(spreadSheet_page)
 set_with_dataframe(work_sheet_page, df, include_index=True)
-"""
 
 time.sleep(1)
-# browser.quit()
+browser.quit()
