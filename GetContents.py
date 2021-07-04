@@ -19,6 +19,7 @@ browser.get('https://www.youtube.com/c/LutoAraka/community')
 time.sleep(2)
 
 # 最後に到達しているかどうかをチェックし
+# browser.find_element_by_id('banner-editor').click()
 browser.find_element_by_id('content-text').click()
 for i in range(10):
     browser.find_element_by_tag_name('body').send_keys(Keys.PAGE_DOWN)
