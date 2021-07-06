@@ -252,5 +252,6 @@ def main():
         time.sleep(1)
     logger.debug('--All Done--')
     browser.quit()
+    sys.exit()
 
 main()
